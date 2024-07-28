@@ -17,6 +17,7 @@ public class PropertyController {
     @GetMapping
     public List<Property> getAllProperties() {
         return propertyService.getAllProperties();
+        
     }
 
     @GetMapping("/{id}")
