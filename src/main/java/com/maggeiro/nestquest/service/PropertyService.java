@@ -1,6 +1,7 @@
 package com.maggeiro.nestquest.service;
 
-import com.maggeiro.nestquest.Property;
+import com.maggeiro.nestquest.entity.Property;
+import com.maggeiro.nestquest.exception.ResourceNotFoundException;
 import com.maggeiro.nestquest.repository.PropertyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,15 +17,17 @@ public class PropertyService {
         return propertyRepository.findAll();
     }
 
-    public Property getPropertyById(int id){
-        return propertyRepository.findById(id).orElse(null);
+    public Property getPropertyById(Integer id){
+        return propertyRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Property not found for this id: " + id));
     }
 
-    public Property saveProperty(Property property){
+    public Property createProperty(Property property){
         return propertyRepository.save(property);
     }
 
-    public void deleteProperty(int id){
+    public void deleteProperty(Integer id){
+        Property property = propertyRepository.findById(id)
+                        .orElseThrow(()  -> new ResourceNotFoundException("Property not found for id: " +id));
         propertyRepository.deleteById(id);
     }
 }

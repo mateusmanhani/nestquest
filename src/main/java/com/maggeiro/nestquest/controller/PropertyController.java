@@ -1,8 +1,10 @@
 package com.maggeiro.nestquest.controller;
 
-import com.maggeiro.nestquest.Property;
+import com.maggeiro.nestquest.entity.Property;
 import com.maggeiro.nestquest.service.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,23 +19,26 @@ public class PropertyController {
     @GetMapping
     public List<Property> getAllProperties() {
         return propertyService.getAllProperties();
-        
     }
 
     @GetMapping("/{id}")
-    public Property getPropertyById(@PathVariable int id){
-        return propertyService.getPropertyById(id);
+    public ResponseEntity<Property> getPropertyById(@PathVariable int id) {
+        Property property = propertyService.getPropertyById(id);
+        if (property == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(property);
     }
 
     @PostMapping
-    public Property createProperty(@RequestBody Property property){
-        return propertyService.saveProperty(property);
+    public ResponseEntity<Property> createProperty(@RequestBody Property property) {
+        Property createdProperty = propertyService.createProperty(property);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdProperty);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteProperty(@PathVariable int id) {
+    public ResponseEntity<Void> deleteProperty(@PathVariable int id) {
         propertyService.deleteProperty(id);
+        return ResponseEntity.noContent().build();
     }
-
-
 }

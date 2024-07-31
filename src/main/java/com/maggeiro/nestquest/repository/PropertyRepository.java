@@ -1,6 +1,6 @@
 package com.maggeiro.nestquest.repository;
 
-import com.maggeiro.nestquest.Property;
+import com.maggeiro.nestquest.entity.Property;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

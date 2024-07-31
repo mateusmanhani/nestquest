@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Properties</title>
+</head>
+<body>
+<h1>Properties List</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Street Address</th>
+        <th>City</th>
+        <th>County</th>
+        <th>Eircode</th>
+        <th>Price</th>
+        <th>Bedrooms</th>
+        <th>Bathrooms</th>
+        <th>Square Meters</th>
+        <th>Parking Spaces</th>
+        <th>Energy Rating</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="property : ${properties}">
+        <td th:text="${property.id}"></td>
+        <td th:text="${property.streetAddress}"></td>
+        <td th:text="${property.city}"></td>
+        <td th:text="${property.county}"></td>
+        <td th:text="${property.eircode}"></td>
+        <td th:text="${property.price}"></td>
+        <td th:text="${property.numOfBedrooms}"></td>
+        <td th:text="${property.numOfBathrooms}"></td>
+        <td th:text="${property.sqm}"></td>
+        <td th:text="${property.parkingSpaces}"></td>
+        <td th:text="${property.energyRating}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
